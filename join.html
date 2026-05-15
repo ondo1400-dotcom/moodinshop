@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Join Us · Collaborate · MOODINSHOP</title>
+  <meta name="description" content="무인샵과 함께 무드를 만들어갈 크리에이터, 브랜드, 공간 파트너를 찾습니다.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="join">
+  <div id="nav-root"></div>
+
+  <!-- HERO -->
+  <div class="join-hero">
+    <div class="join-hero-tag">무인샵과 함께 · Collaborate with Us</div>
+    <h1 class="join-hero-title">JOIN<br>US.</h1>
+    <p class="join-hero-sub">
+      무드를 만드는 사람들과 함께합니다.<br>
+      브랜드, 크리에이터, 아티스트 — 무인샵의 세계를 함께 넓혀갈 분들을 찾습니다.
+    </p>
+  </div>
+
+  <!-- COLLABORATION TYPES -->
+  <div class="join-types">
+    <div class="join-types-inner">
+      <div class="fu">
+        <p class="lbl">Collaboration Types · 협업 유형</p>
+        <h2 class="en">LET'S MAKE<br><em>MOOD TOGETHER.</em></h2>
+      </div>
+      <div class="join-grid fu d1">
+        <div class="jcard">
+          <div class="jcard-icon">🎨</div>
+          <div class="jcard-name">CREATOR</div>
+          <div class="jcard-ko">크리에이터 협업</div>
+          <p class="jcard-desc">무드를 콘텐츠로 만드는 크리에이터. 인스타그램, 유튜브, 블로그, 틱톡 — 플랫폼에 상관없이 감각이 있다면 함께할 수 있습니다.</p>
+          <div class="jcard-tags">
+            <span class="jtag">SNS 리뷰</span><span class="jtag">콘텐츠 제작</span><span class="jtag">무드 큐레이션</span>
+          </div>
+        </div>
+        <div class="jcard">
+          <div class="jcard-icon">🏢</div>
+          <div class="jcard-name">BRAND</div>
+          <div class="jcard-ko">브랜드 파트너십</div>
+          <p class="jcard-desc">무드와 라이프스타일을 공유하는 브랜드와 함께합니다. 팝업 공동 기획, 제품 콜라보, 패키지 협업 등 다양한 형태의 파트너십이 가능합니다.</p>
+          <div class="jcard-tags">
+            <span class="jtag">콜라보 제품</span><span class="jtag">공동 팝업</span><span class="jtag">패키지 협업</span>
+          </div>
+        </div>
+        <div class="jcard">
+          <div class="jcard-icon">📍</div>
+          <div class="jcard-name">SPACE</div>
+          <div class="jcard-ko">공간 · 팝업 파트너</div>
+          <p class="jcard-desc">무인샵의 팝업을 함께 열 공간 파트너를 찾습니다. 홍대·합정·상수를 중심으로, 무드가 있는 공간이라면 어디든 가능합니다.</p>
+          <div class="jcard-tags">
+            <span class="jtag">팝업 공간</span><span class="jtag">홍대·합정·상수</span><span class="jtag">무드 공간</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION FORM -->
+  <div class="join-apply">
+    <div class="join-apply-inner">
+      <div class="fu">
+        <p class="lbl" style="color:rgba(255,255,255,0.4)">Apply · 협업 신청</p>
+        <h2 class="mag-sub-title">APPLY<br>NOW.</h2>
+        <p class="mag-sub-desc" style="margin-bottom:0">
+          협업을 원하시는 분들은 아래 양식을 작성해 주세요.<br>
+          검토 후 담당자가 직접 연락드립니다.
+        </p>
+      </div>
+      <div class="join-form fu d1" id="joinForm">
+        <div class="join-form-row">
+          <input class="ji" type="text" id="jName" placeholder="이름 / 브랜드명">
+          <input class="ji" type="email" id="jEmail" placeholder="이메일">
+        </div>
+        <div class="join-form-row">
+          <input class="ji" type="tel" id="jPhone" placeholder="전화번호">
+          <select class="ji" id="jType">
+            <option value="" disabled selected>협업 유형 선택</option>
+            <option>크리에이터 협업</option>
+            <option>브랜드 파트너십</option>
+            <option>공간 · 팝업 파트너</option>
+            <option>기타</option>
+          </select>
+        </div>
+        <input class="ji" type="text" id="jUrl" placeholder="SNS / 웹사이트 링크 (선택)">
+        <textarea class="ji" id="jMsg" placeholder="협업 내용 및 아이디어를 자유롭게 적어주세요."></textarea>
+        <button class="btn btn-accent" style="align-self:flex-start;margin-top:4px" onclick="submitJoin()">신청하기 →</button>
+      </div>
+      <p class="join-success" id="joinSuccess">신청이 완료되었습니다. 검토 후 빠른 시일 내에 연락드리겠습니다. 🕯</p>
+    </div>
+  </div>
+
+  <div id="footer-root"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
