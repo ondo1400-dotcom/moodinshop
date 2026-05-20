@@ -287,21 +287,24 @@ function initPopupStoreModal() {
   const overlay = document.getElementById('popupStoreModal');
   if (!overlay) return;
 
-  // 오늘 이미 닫았으면 표시 안 함 (하루 한 번만)
-  const today = new Date().toDateString();
-  if (localStorage.getItem('psmDismissed') === today) return;
+  const trigger = document.getElementById('psmTrigger');
 
-  // Show after 1.2s
-  setTimeout(() => overlay.classList.add('open'), 1200);
+  function openPsm() {
+    overlay.classList.add('open');
+    if (trigger) trigger.classList.remove('visible');
+  }
 
   function closePsm() {
     overlay.classList.remove('open');
-    localStorage.setItem('psmDismissed', new Date().toDateString());
+    if (trigger) trigger.classList.add('visible');
   }
 
+  // 홈 들어올 때마다 자동으로 표시
+  setTimeout(openPsm, 1200);
+
   document.getElementById('psmClose')?.addEventListener('click', closePsm);
-  overlay.addEventListener('click', e => { if (e.target === overlay) closePsm(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closePsm(); });
+  trigger?.addEventListener('click', openPsm);
 
   const form = document.getElementById('psmForm');
   if (!form) return;
