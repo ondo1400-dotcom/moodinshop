@@ -5,7 +5,7 @@
 
 // ── GOOGLE SHEETS 연동 ────────────────────────────────────────
 // Apps Script 배포 후 아래 URL을 교체하세요
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbxTIswEZkTPSj9BGtg9jnhhucRF-khuv1aT1MeiI0OCwnDDxqmA654s7EcoGw-TxcaK/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbw6Cnm1SB-0OFe0Z13boFhEkNrBiGxlaDN1cJVwnTmSNgC4UfzKy5YU1BHrx8LZepXH/exec';
 
 function sendToSheet(data) {
   if (!GAS_URL || GAS_URL.startsWith('YOUR_')) return;
