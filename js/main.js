@@ -3,6 +3,20 @@
    Shared: Nav · Footer · Animations · Quiz · Forms
 ═══════════════════════════════════════════ */
 
+// ── GOOGLE SHEETS 연동 ────────────────────────────────────────
+// Apps Script 배포 후 아래 URL을 교체하세요
+const GAS_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+
+function sendToSheet(data) {
+  if (!GAS_URL || GAS_URL.startsWith('YOUR_')) return;
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(data)
+  }).catch(() => {}); // 네트워크 오류 조용히 처리
+}
+
 // ── NAV HTML ──────────────────────────────────────────────────
 const NAV_HTML = `
 <nav id="mainNav">
@@ -226,6 +240,7 @@ function initPopupForm() {
   btn.addEventListener('click', () => {
     const inp = document.getElementById('popupEmail');
     if (!inp || !inp.value.includes('@')) { if (inp) inp.style.background = 'rgba(255,80,60,0.18)'; return; }
+    sendToSheet({ type: 'popup-alert', email: inp.value.trim() });
     document.getElementById('emailFormWrap').style.display = 'none';
     document.getElementById('emailSuccess').style.display  = 'block';
     document.getElementById('emailNote').style.display     = 'none';
@@ -238,6 +253,12 @@ function initPopupForm() {
 window.subMag = function () {
   const e = document.getElementById('subEmail');
   if (!e || !e.value.includes('@')) { if (e) e.style.borderColor = 'rgba(255,100,80,0.5)'; return; }
+  sendToSheet({
+    type:  'magazine',
+    name:  document.getElementById('subName')?.value.trim()  || '',
+    email: e.value.trim(),
+    phone: document.getElementById('subPhone')?.value.trim() || ''
+  });
   const f = document.getElementById('subForm'), s = document.getElementById('subSuccess');
   if (f) f.style.display = 'none';
   if (s) s.style.display = 'block';
@@ -247,6 +268,15 @@ window.subMag = function () {
 window.submitJoin = function () {
   const e = document.getElementById('jEmail');
   if (!e || !e.value.includes('@')) { if (e) e.style.borderColor = 'rgba(255,100,80,0.5)'; return; }
+  sendToSheet({
+    type:    'join',
+    name:    document.getElementById('jName')?.value.trim()  || '',
+    email:   e.value.trim(),
+    phone:   document.getElementById('jPhone')?.value.trim() || '',
+    collab:  document.getElementById('jType')?.value         || '',
+    url:     document.getElementById('jUrl')?.value.trim()   || '',
+    message: document.getElementById('jMsg')?.value.trim()   || ''
+  });
   const f = document.getElementById('joinForm'), s = document.getElementById('joinSuccess');
   if (f) f.style.display = 'none';
   if (s) s.style.display = 'block';
@@ -286,6 +316,16 @@ function initPopupStoreModal() {
     if (!name?.value.trim())         { name?.classList.add('error');  name?.focus();  ok = false; }
     if (!email?.value.includes('@')) { email?.classList.add('error'); email?.focus(); ok = false; }
     if (!ok) return;
+
+    sendToSheet({
+      type:    'popup-store',
+      name:    name.value.trim(),
+      phone:   document.getElementById('psmPhone')?.value.trim()  || '',
+      email:   email.value.trim(),
+      date:    document.getElementById('psmDate')?.value           || '',
+      people:  document.getElementById('psmPeople')?.value         || '',
+      message: document.getElementById('psmMsg')?.value.trim()    || ''
+    });
 
     form.style.display = 'none';
     document.getElementById('psmSuccess')?.classList.add('show');
