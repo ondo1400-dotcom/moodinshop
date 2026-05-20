@@ -287,24 +287,25 @@ function initPopupStoreModal() {
   const overlay = document.getElementById('popupStoreModal');
   if (!overlay) return;
 
-  const trigger = document.getElementById('psmTrigger');
+  const widget = document.getElementById('psmWidget');
 
   function openPsm() {
     overlay.classList.add('open');
-    if (trigger) trigger.classList.remove('visible');
+    if (widget) widget.classList.remove('visible');
   }
 
   function closePsm() {
     overlay.classList.remove('open');
-    if (trigger) trigger.classList.add('visible');
+    if (widget) widget.classList.add('visible');
   }
 
-  // 홈 들어올 때마다 자동으로 표시
+  // 홈 들어올 때마다 자동 표시
   setTimeout(openPsm, 1200);
 
   document.getElementById('psmClose')?.addEventListener('click', closePsm);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closePsm(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closePsm(); });
-  trigger?.addEventListener('click', openPsm);
+  widget?.addEventListener('click', openPsm);
 
   const form = document.getElementById('psmForm');
   if (!form) return;
