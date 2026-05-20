@@ -287,15 +287,16 @@ function initPopupStoreModal() {
   const overlay = document.getElementById('popupStoreModal');
   if (!overlay) return;
 
-  // Don't show again if already dismissed this session
-  if (sessionStorage.getItem('psmDismissed')) return;
+  // 오늘 이미 닫았으면 표시 안 함 (하루 한 번만)
+  const today = new Date().toDateString();
+  if (localStorage.getItem('psmDismissed') === today) return;
 
   // Show after 1.2s
   setTimeout(() => overlay.classList.add('open'), 1200);
 
   function closePsm() {
     overlay.classList.remove('open');
-    sessionStorage.setItem('psmDismissed', '1');
+    localStorage.setItem('psmDismissed', new Date().toDateString());
   }
 
   document.getElementById('psmClose')?.addEventListener('click', closePsm);
