@@ -252,6 +252,51 @@ window.submitJoin = function () {
   if (s) s.style.display = 'block';
 };
 
+// ── POPUP STORE MODAL ─────────────────────────────────────────
+function initPopupStoreModal() {
+  const overlay = document.getElementById('popupStoreModal');
+  if (!overlay) return;
+
+  // Don't show again if already dismissed this session
+  if (sessionStorage.getItem('psmDismissed')) return;
+
+  // Show after 1.2s
+  setTimeout(() => overlay.classList.add('open'), 1200);
+
+  function closePsm() {
+    overlay.classList.remove('open');
+    sessionStorage.setItem('psmDismissed', '1');
+  }
+
+  document.getElementById('psmClose')?.addEventListener('click', closePsm);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closePsm(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closePsm(); });
+
+  const form = document.getElementById('psmForm');
+  if (!form) return;
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const name  = document.getElementById('psmName');
+    const email = document.getElementById('psmEmail');
+    let ok = true;
+
+    [name, email].forEach(el => el?.classList.remove('error'));
+
+    if (!name?.value.trim())         { name?.classList.add('error');  name?.focus();  ok = false; }
+    if (!email?.value.includes('@')) { email?.classList.add('error'); email?.focus(); ok = false; }
+    if (!ok) return;
+
+    form.style.display = 'none';
+    document.getElementById('psmSuccess')?.classList.add('show');
+  });
+
+  // Clear error state on input
+  form.querySelectorAll('.psm-in').forEach(el => {
+    el.addEventListener('input', () => el.classList.remove('error'));
+  });
+}
+
 // ── ANCHOR SCROLL (for index.html#popup, #diag) ───────────────
 function initAnchorScroll() {
   if (window.location.hash) {
@@ -272,5 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroAnimation();
   initQuiz();
   initPopupForm();
+  initPopupStoreModal();
   initAnchorScroll();
 });

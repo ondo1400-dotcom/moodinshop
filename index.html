@@ -271,6 +271,70 @@
   </section>
 
   <div id="footer-root"></div>
+
+  <!-- POPUP STORE REGISTRATION MODAL -->
+  <div id="popupStoreModal" class="psm-overlay" role="dialog" aria-modal="true" aria-label="팝업스토어 신청">
+    <div class="psm-wrap">
+      <button class="psm-close" id="psmClose" aria-label="닫기">✕</button>
+
+      <!-- 왼쪽: 이미지 + 행사 정보 -->
+      <div class="psm-left">
+        <div class="psm-img">
+          <img src="images/pop-up_main.png" alt="무인샵 팝업스토어">
+          <div class="psm-img-tag">A POP-UP STORE FOR YOUR MOOD</div>
+        </div>
+        <div class="psm-event-info">
+          <span class="psm-event-badge">팝업 오픈 · 2026 May</span>
+          <div class="psm-event-title">MOOD IN SHOP<br>POPUP STORE</div>
+          <div class="psm-event-meta">
+            당신의 하루에 조용히 스며드는 순간<br><br>
+            Scent &nbsp;·&nbsp; Sentence &nbsp;·&nbsp; Sound<br>
+            📍 홍대 · 합정 · 상수<br>
+            🗓 2026. 05 MAY
+          </div>
+        </div>
+      </div>
+
+      <!-- 오른쪽: 신청 폼 -->
+      <div class="psm-right">
+        <p class="lbl">Popup Store · 팝업 신청</p>
+        <h3 class="psm-form-title">머무는 순간이<br>곧 무드가 됩니다.</h3>
+        <p class="psm-form-sub">팝업스토어를 가장 먼저 경험하고 싶다면<br>신청해 주세요.</p>
+
+        <form class="psm-form" id="psmForm" novalidate>
+          <div class="psm-row">
+            <input class="psm-in" type="text" id="psmName" placeholder="이름 *" autocomplete="name">
+            <input class="psm-in" type="tel" id="psmPhone" placeholder="연락처" autocomplete="tel">
+          </div>
+          <input class="psm-in" type="email" id="psmEmail" placeholder="이메일 *" autocomplete="email">
+          <select class="psm-in" id="psmDate">
+            <option value="">방문 희망 시기</option>
+            <option>오픈 첫 날 (일정 공개 후 알림)</option>
+            <option>주말</option>
+            <option>평일</option>
+            <option>언제든지 가능</option>
+          </select>
+          <select class="psm-in" id="psmPeople">
+            <option value="">참가 인원</option>
+            <option>1명 (혼자)</option>
+            <option>2명</option>
+            <option>3명</option>
+            <option>4명 이상</option>
+          </select>
+          <textarea class="psm-in" id="psmMsg" placeholder="나의 무드 한 줄 (선택)"></textarea>
+          <button type="submit" class="btn btn-dark psm-submit">팝업 신청하기</button>
+        </form>
+
+        <div class="psm-success" id="psmSuccess">
+          <span class="psm-success-icon">🕯</span>
+          <p>신청이 완료됐어요.<br>무드를 기다리고 있을게요.</p>
+        </div>
+
+        <p class="psm-note">개인정보는 팝업 안내 목적으로만 사용됩니다 · 스팸 없음</p>
+      </div>
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
 </body>
 </html>
