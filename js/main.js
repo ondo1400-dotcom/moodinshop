@@ -310,35 +310,57 @@ function initPopupStoreModal() {
   const form = document.getElementById('psmForm');
   if (!form) return;
 
+  const dateEl = document.getElementById('psmDate');
+  const timeEl = document.getElementById('psmTime');
+
+  const SAT_TIMES  = ['16:00–17:00', '17:00–18:00', '18:00–19:00', '19:00–20:00', '20:00–21:00', '21:00–22:00'];
+  const WEEK_TIMES = ['19:00–20:00', '20:00–21:00', '21:00–22:00'];
+
+  dateEl?.addEventListener('change', () => {
+    const v = dateEl.value;
+    if (!v) {
+      timeEl.innerHTML = '<option value="">방문 희망일을 먼저 선택해주세요</option>';
+      timeEl.disabled = true;
+      return;
+    }
+    const slots = v.includes('토') ? SAT_TIMES : WEEK_TIMES;
+    timeEl.innerHTML = '<option value="">방문 희망 시간 선택 *</option>' +
+      slots.map(s => `<option value="${s}">${s}</option>`).join('');
+    timeEl.disabled = false;
+    timeEl.classList.remove('error');
+  });
+
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const name  = document.getElementById('psmName');
-    const email = document.getElementById('psmEmail');
+    const name = document.getElementById('psmName');
+    const date = document.getElementById('psmDate');
+    const time = document.getElementById('psmTime');
     let ok = true;
 
-    [name, email].forEach(el => el?.classList.remove('error'));
+    [name, date, time].forEach(el => el?.classList.remove('error'));
 
-    if (!name?.value.trim())         { name?.classList.add('error');  name?.focus();  ok = false; }
-    if (!email?.value.includes('@')) { email?.classList.add('error'); email?.focus(); ok = false; }
+    if (!name?.value.trim()) { name?.classList.add('error'); name?.focus(); ok = false; }
+    if (!date?.value)        { date?.classList.add('error'); if (ok) date?.focus(); ok = false; }
+    if (!time?.value)        { time?.classList.add('error'); if (ok) time?.focus(); ok = false; }
     if (!ok) return;
 
     sendToSheet({
-      type:    'popup-store',
-      name:    name.value.trim(),
-      phone:   document.getElementById('psmPhone')?.value.trim()  || '',
-      email:   email.value.trim(),
-      date:    document.getElementById('psmDate')?.value           || '',
-      people:  document.getElementById('psmPeople')?.value         || '',
-      message: document.getElementById('psmMsg')?.value.trim()    || ''
+      type:     'popup-store',
+      name:     name.value.trim(),
+      phone:    document.getElementById('psmPhone')?.value.trim()    || '',
+      date:     date.value,
+      time:     time.value,
+      referrer: document.getElementById('psmReferrer')?.value.trim() || '',
+      message:  document.getElementById('psmMsg')?.value.trim()      || ''
     });
 
     form.style.display = 'none';
     document.getElementById('psmSuccess')?.classList.add('show');
   });
 
-  // Clear error state on input
   form.querySelectorAll('.psm-in').forEach(el => {
     el.addEventListener('input', () => el.classList.remove('error'));
+    el.addEventListener('change', () => el.classList.remove('error'));
   });
 }
 

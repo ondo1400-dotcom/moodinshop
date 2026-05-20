@@ -312,21 +312,20 @@
             <input class="psm-in" type="text" id="psmName" placeholder="이름 *" autocomplete="name">
             <input class="psm-in" type="tel" id="psmPhone" placeholder="연락처" autocomplete="tel">
           </div>
-          <input class="psm-in" type="email" id="psmEmail" placeholder="이메일 *" autocomplete="email">
           <select class="psm-in" id="psmDate">
-            <option value="">방문 희망 시기</option>
-            <option>오픈 첫 날 (일정 공개 후 알림)</option>
-            <option>주말</option>
-            <option>평일</option>
-            <option>언제든지 가능</option>
+            <option value="">방문 희망일 선택 *</option>
+            <option value="5/23(토)">5월 23일 (토)</option>
+            <option value="5/26(화)">5월 26일 (화)</option>
+            <option value="5/29(금)">5월 29일 (금)</option>
+            <option value="5/30(토)">5월 30일 (토)</option>
+            <option value="6/2(화)">6월 2일 (화)</option>
+            <option value="6/5(금)">6월 5일 (금)</option>
+            <option value="6/6(토)">6월 6일 (토)</option>
           </select>
-          <select class="psm-in" id="psmPeople">
-            <option value="">참가 인원</option>
-            <option>1명 (혼자)</option>
-            <option>2명</option>
-            <option>3명</option>
-            <option>4명 이상</option>
+          <select class="psm-in" id="psmTime" disabled>
+            <option value="">방문 희망일을 먼저 선택해주세요</option>
           </select>
+          <input class="psm-in" type="text" id="psmReferrer" placeholder="추천인 이름 (선택)">
           <textarea class="psm-in" id="psmMsg" placeholder="나의 무드 한 줄 (선택)"></textarea>
           <button type="submit" class="btn btn-dark psm-submit">팝업 신청하기</button>
         </form>

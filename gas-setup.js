@@ -27,8 +27,8 @@ function doPost(e) {
       row   = [ts, data.email];
 
     } else if (data.type === 'popup-store') {
-      sheet = getOrCreateSheet(ss, '팝업스토어 신청', ['접수일시', '이름', '연락처', '이메일', '방문 희망', '인원', '무드 한 줄']);
-      row   = [ts, data.name, data.phone, data.email, data.date, data.people, data.message];
+      sheet = getOrCreateSheet(ss, '팝업스토어 신청', ['접수일시', '이름', '연락처', '방문 희망일', '방문 시간', '추천인', '무드 한 줄']);
+      row   = [ts, data.name, data.phone, data.date, data.time, data.referrer, data.message];
 
     } else if (data.type === 'magazine') {
       sheet = getOrCreateSheet(ss, '매거진 구독', ['접수일시', '이름', '이메일', '전화번호']);
