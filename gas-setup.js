@@ -67,14 +67,16 @@ function doPost(e) {
 
 function sendTelegram(text) {
   if (!TG_TOKEN || TG_TOKEN.startsWith('YOUR_')) return;
-  UrlFetchApp.fetch(
-    `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
-    {
-      method: 'post',
-      contentType: 'application/json',
-      payload: JSON.stringify({ chat_id: TG_CHAT_ID, text: text, parse_mode: 'HTML' })
-    }
-  );
+  try {
+    UrlFetchApp.fetch(
+      `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,
+      {
+        method: 'post',
+        contentType: 'application/json',
+        payload: JSON.stringify({ chat_id: TG_CHAT_ID, text: text, parse_mode: 'HTML' })
+      }
+    );
+  } catch (err) {}
 }
 
 function getOrCreateSheet(ss, name, headers) {
